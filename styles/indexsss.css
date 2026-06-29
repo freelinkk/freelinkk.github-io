@@ -1,0 +1,26 @@
+body {
+    --nav-width: 200px;
+    margin: 0 0 0 var(--nav-width);
+}
+
+.nav {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: var(--nav-width);
+    height: 100vh;
+    background: white;
+}
+
+.nav__link {
+    display: block;
+    padding: 1px 30px;
+    text-decoration: none;
+    color: black;
+}
+
+
+#app {
+    margin: 2em;
+    line-height: 1.5;
+}
