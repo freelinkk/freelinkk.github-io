@@ -45,28 +45,28 @@ li {
   }
 
   .sidebar a {
+    display: block;
     color:#000;
     text-decoration: none;
   }
-  
+
   .sidebar a:link {
     color: rgb(0, 0, 0);
   }
-  
+
   /* visited link */
   .sidebar a:visited {
     color: black;
   }
-  
+
   .sidebar a.current {
-    color:red;
+    color: #e07d59;
   }
 
   /* mouse over link */
-  /* selected link */
-  .sidebar a:hover,
-  .sidebar a.active {
-    color: grey;
+  .sidebar a:hover {
+    background-color: #e07d59;
+    color: white;
   }
 
   /* side side bar */

@@ -13,3 +13,10 @@
         </li>
     </div>
 </nav>
+<script>
+    document.querySelectorAll('.sidebar a[href]').forEach(function (link) {
+        if (link.pathname === window.location.pathname) {
+            link.classList.add('current');
+        }
+    });
+</script>
