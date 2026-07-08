@@ -1,0 +1,505 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>link.exe</title>
+    <link rel="icon" type="image/x-icon" href="/assets/about/cropped.jpg">
+    <link rel="stylesheet" href="https://unpkg.com/98.css">
+    <style>
+        html, body {
+            margin: 0;
+            padding: 0;
+            height: 100%;
+            overflow: hidden;
+            font-family: "Pixelated MS Sans Serif", Arial, sans-serif;
+        }
+
+        #desktop {
+            position: relative;
+            width: 100%;
+            height: 100vh;
+            background-color: #008080;
+            overflow: hidden;
+        }
+
+        /* desktop icons */
+        .icon {
+            position: absolute;
+            width: 74px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 4px;
+            cursor: pointer;
+            user-select: none;
+        }
+
+        .icon .icon-glyph {
+            font-size: 32px;
+            line-height: 1;
+        }
+
+        .icon .icon-label {
+            color: #fff;
+            font-size: 12px;
+            text-align: center;
+            padding: 1px 3px;
+            width: 100%;
+            word-break: break-word;
+            overflow-wrap: break-word;
+        }
+
+        .icon.selected .icon-label {
+            background: #000080;
+        }
+
+        /* windows */
+        .window {
+            position: absolute;
+            display: none;
+        }
+
+        .window .title-bar {
+            cursor: default;
+        }
+
+        .window-body {
+            max-height: 60vh;
+            overflow: auto;
+        }
+
+        .video-embed {
+            position: relative;
+            width: 100%;
+            padding-top: 56.25%;
+        }
+
+        .video-embed iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border: 0;
+        }
+
+        .folder-icons {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 16px;
+        }
+
+        .folder-icon {
+            width: 80px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 4px;
+            cursor: pointer;
+            user-select: none;
+        }
+
+        .folder-icon img {
+            width: 64px;
+            height: 64px;
+            object-fit: cover;
+            border: 1px solid #808080;
+        }
+
+        .folder-icon-label {
+            font-size: 12px;
+            text-align: center;
+            word-break: break-word;
+        }
+
+        .photo-window-body img {
+            max-width: 100%;
+            display: block;
+            margin: 0 auto;
+        }
+
+        /* taskbar */
+        #taskbar {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 32px;
+            background: silver;
+            border-top: 2px solid #fff;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            padding: 0 4px;
+            box-sizing: border-box;
+            z-index: 1000;
+        }
+
+        #taskbar #start-btn {
+            font-weight: bold;
+        }
+
+        #start-menu {
+            position: absolute;
+            bottom: 32px;
+            left: 4px;
+            display: none;
+            min-width: 160px;
+            padding: 4px;
+            z-index: 1001;
+        }
+
+        #start-menu ul {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+        }
+
+        #start-menu li {
+            padding: 4px 6px;
+            cursor: pointer;
+        }
+
+        #start-menu li:hover {
+            background: #000080;
+            color: #fff;
+        }
+
+        #taskbar-clock {
+            margin-left: auto;
+            padding: 2px 8px;
+        }
+
+        /* companion */
+        #companion {
+            position: absolute;
+            right: 30px;
+            bottom: 50px;
+            width: 180px;
+            cursor: grab;
+            user-select: none;
+            -webkit-user-drag: none;
+            z-index: 2000;
+        }
+
+        #companion:active {
+            cursor: grabbing;
+        }
+    </style>
+</head>
+<body>
+
+    <div id="desktop">
+
+        <!-- desktop icons -->
+        <div class="icon" style="top: 20px; left: 20px;" ondblclick="openWindow('win-description')">
+            <div class="icon-glyph">📄</div>
+            <div class="icon-label">description.exe</div>
+        </div>
+
+        <div class="icon" style="top: 120px; left: 20px;" ondblclick="openWindow('win-who')">
+            <div class="icon-glyph">👤</div>
+            <div class="icon-label">who.exe</div>
+        </div>
+
+        <div class="icon" style="top: 220px; left: 20px;" ondblclick="openWindow('win-press')">
+            <div class="icon-glyph">🖼️</div>
+            <div class="icon-label">press_photos.exe</div>
+        </div>
+
+        <div class="icon" style="top: 320px; left: 20px;" ondblclick="openWindow('win-contact')">
+            <div class="icon-glyph">✉️</div>
+            <div class="icon-label">contact.exe</div>
+        </div>
+
+        <div class="icon" style="top: 420px; left: 20px;" ondblclick="openWindow('win-videos')">
+            <div class="icon-glyph">🎬</div>
+            <div class="icon-label">daddy_shareholders_performance.exe</div>
+        </div>
+
+        <!-- windows -->
+        <div class="window" id="win-description" style="top: 60px; left: 140px; width: 420px;">
+            <div class="title-bar">
+                <div class="title-bar-text">description.exe</div>
+                <div class="title-bar-controls">
+                    <button aria-label="Close" onclick="closeWindow('win-description')"></button>
+                </div>
+            </div>
+            <div class="window-body">
+                <p>link.exe [free<b>link</b> + tipp<b>.exe</b>]</p>
+                <p>Formed at SoundArtLab in Struer, Denmark</p>
+            </div>
+        </div>
+
+        <div class="window" id="win-who" style="top: 100px; left: 220px; width: 380px;">
+            <div class="title-bar">
+                <div class="title-bar-text">who.exe</div>
+                <div class="title-bar-controls">
+                    <button aria-label="Close" onclick="closeWindow('win-who')"></button>
+                </div>
+            </div>
+            <div class="window-body">
+                <ul class="tree-view">
+                    <li>[Jason Clark / freelink] — website / instagram</li>
+                    <li>[Rheece Van Der Linden / Tipp.exe] — website / instagram</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="window" id="win-contact" style="top: 140px; left: 300px; width: 360px;">
+            <div class="title-bar">
+                <div class="title-bar-text">contact.exe</div>
+                <div class="title-bar-controls">
+                    <button aria-label="Close" onclick="closeWindow('win-contact')"></button>
+                </div>
+            </div>
+            <div class="window-body">
+                <div class="field-row-stacked" style="width: 100%;">
+                    <label for="contact-email">email / booking</label>
+                    <input id="contact-email" type="text" readonly value="placeholder@email.com">
+                </div>
+                <div class="field-row-stacked" style="width: 100%;">
+                    <label for="contact-instagram">instagram</label>
+                    <input id="contact-instagram" type="text" readonly value="@placeholder">
+                </div>
+            </div>
+        </div>
+
+        <div class="window" id="win-videos" style="top: 80px; left: 380px; width: 780px;">
+            <div class="title-bar">
+                <div class="title-bar-text">daddy_shareholders_performance.exe</div>
+                <div class="title-bar-controls">
+                    <button aria-label="Close" onclick="closeWindow('win-videos')"></button>
+                </div>
+            </div>
+            <div class="window-body">
+                <div class="video-embed">
+                    <iframe src="https://player.vimeo.com/video/1208024619?h=7f1bc9aadf&byline=0&portrait=0&badge=0&autopause=0&player_id=0&app_id=58479" allow="autoplay; fullscreen; picture-in-picture" title="Living Room - Jason Clark &amp; Atser Damsma"></iframe>
+                </div>
+                <p style="margin-bottom: 0;">stuck on the corporate ladder (we took the elevator)</p>
+                <p>Performance, The Cube, Soundhub, Struer (DE)</p>
+            </div>
+        </div>
+
+        <div class="window" id="win-press" style="top: 120px; left: 260px; width: 420px;">
+            <div class="title-bar">
+                <div class="title-bar-text">press_photos.exe</div>
+                <div class="title-bar-controls">
+                    <button aria-label="Close" onclick="closeWindow('win-press')"></button>
+                </div>
+            </div>
+            <div class="window-body">
+                <div class="folder-icons" id="press-folder-icons"></div>
+            </div>
+        </div>
+
+        <!-- taskbar -->
+        <div id="taskbar">
+            <button id="start-btn" onclick="toggleStartMenu()">Start</button>
+            <div id="start-menu" class="window">
+                <ul>
+                    <li onclick="openWindow('win-description'); toggleStartMenu()">description.exe</li>
+                    <li onclick="openWindow('win-who'); toggleStartMenu()">who.exe</li>
+                    <li onclick="openWindow('win-press'); toggleStartMenu()">press_photos.exe</li>
+                    <li onclick="openWindow('win-contact'); toggleStartMenu()">contact.exe</li>
+                    <li onclick="openWindow('win-videos'); toggleStartMenu()">daddy_shareholders_performance.exe</li>
+                </ul>
+            </div>
+            <div id="taskbar-clock" class="status-bar-field"></div>
+        </div>
+
+        <img id="companion" src="/assets/gif/2618416_b872b-837352707.gif" alt="">
+
+    </div>
+
+    <script>
+        let zIndexCounter = 10;
+
+        function bringToFront(win) {
+            zIndexCounter += 1;
+            win.style.zIndex = zIndexCounter;
+        }
+
+        function openWindow(id) {
+            const win = document.getElementById(id);
+            win.style.display = 'block';
+            bringToFront(win);
+        }
+
+        function closeWindow(id) {
+            const win = document.getElementById(id);
+            win.style.display = 'none';
+
+            // reloading any embedded iframe (e.g. video) stops playback on close
+            win.querySelectorAll('iframe').forEach(function (iframe) {
+                iframe.src = iframe.src;
+            });
+        }
+
+        function toggleStartMenu() {
+            const menu = document.getElementById('start-menu');
+            menu.style.display = (menu.style.display === 'block') ? 'none' : 'block';
+        }
+
+        document.addEventListener('click', function (e) {
+            const menu = document.getElementById('start-menu');
+            if (!menu.contains(e.target) && e.target.id !== 'start-btn') {
+                menu.style.display = 'none';
+            }
+        });
+
+        // dragging + focus for windows
+        function initWindowBehavior(win) {
+            win.addEventListener('mousedown', function () {
+                bringToFront(win);
+            });
+
+            const titleBar = win.querySelector('.title-bar');
+            if (!titleBar) return;
+
+            titleBar.addEventListener('mousedown', function (e) {
+                if (e.target.closest('.title-bar-controls')) return;
+
+                const startX = e.clientX;
+                const startY = e.clientY;
+                const startLeft = win.offsetLeft;
+                const startTop = win.offsetTop;
+
+                function onMouseMove(e) {
+                    win.style.left = (startLeft + e.clientX - startX) + 'px';
+                    win.style.top = (startTop + e.clientY - startY) + 'px';
+                }
+
+                function onMouseUp() {
+                    document.removeEventListener('mousemove', onMouseMove);
+                    document.removeEventListener('mouseup', onMouseUp);
+                }
+
+                document.addEventListener('mousemove', onMouseMove);
+                document.addEventListener('mouseup', onMouseUp);
+            });
+        }
+
+        document.querySelectorAll('.window').forEach(initWindowBehavior);
+
+        // desktop icon selection
+        document.querySelectorAll('.icon').forEach(function (icon) {
+            icon.addEventListener('click', function (e) {
+                document.querySelectorAll('.icon').forEach(i => i.classList.remove('selected'));
+                icon.classList.add('selected');
+                e.stopPropagation();
+            });
+        });
+
+        document.getElementById('desktop').addEventListener('click', function () {
+            document.querySelectorAll('.icon').forEach(i => i.classList.remove('selected'));
+        });
+
+        // press photos folder
+        const pressPhotos = [
+            { file: '/assets/link.exe/IMG_3991.JPG', label: 'IMG_3991.JPG' },
+            { file: '/assets/link.exe/IMG_3994.JPG', label: 'IMG_3994.JPG' },
+            { file: '/assets/link.exe/IMG_4015.JPG', label: 'IMG_4015.JPG' }
+        ];
+
+        const pressFolderIcons = document.getElementById('press-folder-icons');
+        pressPhotos.forEach(function (photo, index) {
+            const icon = document.createElement('div');
+            icon.className = 'folder-icon';
+            icon.innerHTML = '<img src="' + photo.file + '" alt="">' +
+                '<div class="folder-icon-label">' + photo.label + '</div>';
+            icon.addEventListener('dblclick', function () {
+                openPhotoWindow(index);
+            });
+            pressFolderIcons.appendChild(icon);
+        });
+
+        function openPhotoWindow(index) {
+            const id = 'win-photo-' + index;
+            let win = document.getElementById(id);
+
+            if (!win) {
+                const photo = pressPhotos[index];
+                win = document.createElement('div');
+                win.className = 'window';
+                win.id = id;
+                win.style.top = (100 + index * 30) + 'px';
+                win.style.left = (500 + index * 30) + 'px';
+                win.innerHTML =
+                    '<div class="title-bar">' +
+                        '<div class="title-bar-text">' + photo.label + '</div>' +
+                        '<div class="title-bar-controls">' +
+                            '<button aria-label="Close" onclick="closeWindow(\'' + id + '\')"></button>' +
+                        '</div>' +
+                    '</div>' +
+                    '<div class="window-body photo-window-body">' +
+                        '<img src="' + photo.file + '" alt="">' +
+                    '</div>';
+                document.getElementById('desktop').appendChild(win);
+                initWindowBehavior(win);
+
+                // size the image (and the window, since it has no fixed width) to
+                // a quarter of the photo's natural resolution
+                const img = win.querySelector('img');
+                function sizeToPhoto() {
+                    img.style.width = Math.round(img.naturalWidth * 0.25) + 'px';
+                    img.style.height = 'auto';
+                }
+                if (img.complete) {
+                    sizeToPhoto();
+                } else {
+                    img.addEventListener('load', sizeToPhoto);
+                }
+            }
+
+            win.style.display = 'block';
+            bringToFront(win);
+        }
+
+        // draggable companion
+        const companion = document.getElementById('companion');
+        companion.addEventListener('mousedown', function (e) {
+            e.preventDefault();
+            companion.style.zIndex = ++zIndexCounter;
+
+            const startX = e.clientX;
+            const startY = e.clientY;
+            const startLeft = companion.offsetLeft;
+            const startTop = companion.offsetTop;
+
+            // switch from right/bottom anchoring to left/top once dragged
+            companion.style.right = 'auto';
+            companion.style.bottom = 'auto';
+            companion.style.left = startLeft + 'px';
+            companion.style.top = startTop + 'px';
+
+            function onMouseMove(e) {
+                companion.style.left = (startLeft + e.clientX - startX) + 'px';
+                companion.style.top = (startTop + e.clientY - startY) + 'px';
+            }
+
+            function onMouseUp() {
+                document.removeEventListener('mousemove', onMouseMove);
+                document.removeEventListener('mouseup', onMouseUp);
+            }
+
+            document.addEventListener('mousemove', onMouseMove);
+            document.addEventListener('mouseup', onMouseUp);
+        });
+
+        // clock
+        function updateClock() {
+            const now = new Date();
+            let h = now.getHours();
+            const m = now.getMinutes().toString().padStart(2, '0');
+            const ampm = h >= 12 ? 'PM' : 'AM';
+            h = h % 12 || 12;
+            document.getElementById('taskbar-clock').textContent = h + ':' + m + ' ' + ampm;
+        }
+        updateClock();
+        setInterval(updateClock, 1000 * 15);
+    </script>
+
+</body>
+</html>
