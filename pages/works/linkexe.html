@@ -119,6 +119,28 @@
             margin: 0 auto;
         }
 
+        /* terminal icon, drawn rather than an emoji */
+        .terminal-glyph {
+            width: 34px;
+            height: 28px;
+            background: #000;
+            border: 2px solid #c0c0c0;
+            box-shadow: inset 1px 1px #808080, 1px 1px #000;
+            color: #00ff00;
+            font-family: "Courier New", monospace;
+            font-size: 12px;
+            font-weight: bold;
+            line-height: 1;
+            padding: 3px 0 0 3px;
+            box-sizing: border-box;
+        }
+
+        #login-error {
+            color: #c00000;
+            min-height: 1em;
+            margin: 6px 0 0;
+        }
+
         /* taskbar */
         #taskbar {
             position: absolute;
@@ -218,6 +240,38 @@
             <div class="icon-label">daddy_shareholders_performance.exe</div>
         </div>
 
+        <div class="icon" style="top: 540px; left: 20px;" ondblclick="openLogin()">
+            <div class="terminal-glyph">&gt;_</div>
+            <div class="icon-label">terminal.exe</div>
+        </div>
+
+        <!-- login window for terminal.exe -->
+        <div class="window" id="win-login" style="top: 160px; left: 340px; width: 300px;">
+            <div class="title-bar">
+                <div class="title-bar-text">Log On to terminal.exe</div>
+                <div class="title-bar-controls">
+                    <button aria-label="Close" onclick="closeWindow('win-login')"></button>
+                </div>
+            </div>
+            <div class="window-body">
+                <form id="login-form" autocomplete="off">
+                    <div class="field-row-stacked">
+                        <label for="login-user">User name:</label>
+                        <input id="login-user" type="text">
+                    </div>
+                    <div class="field-row-stacked">
+                        <label for="login-pass">Password:</label>
+                        <input id="login-pass" type="password">
+                    </div>
+                    <p id="login-error"></p>
+                    <section class="field-row" style="justify-content: flex-end;">
+                        <button type="submit">OK</button>
+                        <button type="button" onclick="closeWindow('win-login')">Cancel</button>
+                    </section>
+                </form>
+            </div>
+        </div>
+
         <!-- windows -->
         <div class="window" id="win-description" style="top: 60px; left: 140px; width: 420px;">
             <div class="title-bar">
@@ -310,6 +364,7 @@
                     <li onclick="openWindow('win-press'); toggleStartMenu()">press_photos.exe</li>
                     <li onclick="openWindow('win-contact'); toggleStartMenu()">contact.exe</li>
                     <li onclick="openWindow('win-videos'); toggleStartMenu()">daddy_shareholders_performance.exe</li>
+                    <li onclick="openLogin(); toggleStartMenu()">terminal.exe</li>
                 </ul>
             </div>
             <div id="taskbar-clock" class="status-bar-field"></div>
@@ -462,6 +517,75 @@
             win.style.display = 'block';
             bringToFront(win);
         }
+
+        // terminal.exe login
+        function openLogin() {
+            document.getElementById('login-form').reset();
+            document.getElementById('login-error').textContent = '';
+            openWindow('win-login');
+            document.getElementById('login-user').focus();
+        }
+
+        // The page behind the login is stored encrypted (see tools/encrypt-page.mjs).
+        // The username + password is the decryption key, so there is no password
+        // in this file to read, and a wrong login simply fails to decrypt.
+        const PROTECTED_PAGE = 'teensy-patcher1.enc.json';
+
+        function fromBase64(s) {
+            return Uint8Array.from(atob(s), c => c.charCodeAt(0));
+        }
+
+        async function decryptPage(user, pass) {
+            if (!window.crypto || !crypto.subtle) throw new Error('insecure');
+            let res;
+            try {
+                res = await fetch(PROTECTED_PAGE, { cache: 'no-store' });
+            } catch (err) {
+                throw new Error('unreachable');
+            }
+            if (!res.ok) throw new Error('missing');
+            const enc = await res.json();
+
+            const baseKey = await crypto.subtle.importKey(
+                'raw', new TextEncoder().encode(user + ':' + pass), 'PBKDF2', false, ['deriveKey']
+            );
+            const key = await crypto.subtle.deriveKey(
+                { name: 'PBKDF2', salt: fromBase64(enc.salt), iterations: enc.iterations, hash: 'SHA-256' },
+                baseKey, { name: 'AES-GCM', length: 256 }, false, ['decrypt']
+            );
+            // throws if the login is wrong
+            return crypto.subtle.decrypt(
+                { name: 'AES-GCM', iv: fromBase64(enc.iv) }, key, fromBase64(enc.data)
+            );
+        }
+
+        document.getElementById('login-form').addEventListener('submit', async function (e) {
+            e.preventDefault();
+            const user = document.getElementById('login-user').value;
+            const pass = document.getElementById('login-pass').value;
+            const error = document.getElementById('login-error');
+            const ok = this.querySelector('button[type="submit"]');
+
+            error.textContent = 'Verifying...';
+            ok.disabled = true;
+            try {
+                const html = await decryptPage(user, pass);
+                const url = URL.createObjectURL(new Blob([html], { type: 'text/html' }));
+                window.location.href = url;
+            } catch (err) {
+                const messages = {
+                    missing: 'The program could not be found.',
+                    unreachable: 'The program could not be loaded. Open this page from the website, not as a local file.',
+                    insecure: 'Secure login needs https (or localhost).'
+                };
+                error.textContent = messages[err.message] || 'The user name or password is incorrect.';
+                console.error(err);
+                document.getElementById('login-pass').value = '';
+                document.getElementById('login-pass').focus();
+            } finally {
+                ok.disabled = false;
+            }
+        });
 
         // draggable companion
         const companion = document.getElementById('companion');
