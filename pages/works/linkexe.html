@@ -240,6 +240,16 @@
             <div class="icon-label">daddy_shareholders_performance.exe</div>
         </div>
 
+        <div class="icon" style="top: 20px; left: 110px;" ondblclick="openWindow('win-bluerider')">
+            <div class="icon-glyph">🎬</div>
+            <div class="icon-label">Blue Rider Radio - 2/10/26.exe</div>
+        </div>
+
+        <div class="icon" style="top: 120px; left: 110px;" ondblclick="openWindow('win-futureintel')">
+            <div class="icon-glyph">🎬</div>
+            <div class="icon-label">Future Intel 1/10/26.exe</div>
+        </div>
+
         <div class="icon" style="top: 540px; left: 20px;" ondblclick="openLogin()">
             <div class="terminal-glyph">&gt;_</div>
             <div class="icon-label">terminal.exe</div>
@@ -342,7 +352,35 @@
             </div>
         </div>
 
-        <div class="window" id="win-press" style="top: 120px; left: 260px; width: 420px;">
+        <div class="window" id="win-bluerider" style="top: 60px; left: 300px; width: 780px;">
+            <div class="title-bar">
+                <div class="title-bar-text">Blue Rider Radio - 2/10/26.exe</div>
+                <div class="title-bar-controls">
+                    <button aria-label="Close" onclick="closeWindow('win-bluerider')"></button>
+                </div>
+            </div>
+            <div class="window-body">
+                <div class="video-embed">
+                    <iframe src="https://www.youtube-nocookie.com/embed/YHWSOICxFbc" allow="autoplay; encrypted-media; fullscreen; picture-in-picture" allowfullscreen title="Blue Rider Radio - 2/10/26"></iframe>
+                </div>
+            </div>
+        </div>
+
+        <div class="window" id="win-futureintel" style="top: 100px; left: 340px; width: 780px;">
+            <div class="title-bar">
+                <div class="title-bar-text">Future Intel 1/10/26.exe</div>
+                <div class="title-bar-controls">
+                    <button aria-label="Close" onclick="closeWindow('win-futureintel')"></button>
+                </div>
+            </div>
+            <div class="window-body">
+                <div class="video-embed">
+                    <iframe src="https://www.youtube-nocookie.com/embed/hhY6s2lwbLY" allow="autoplay; encrypted-media; fullscreen; picture-in-picture" allowfullscreen title="Future Intel 1/10/26"></iframe>
+                </div>
+            </div>
+        </div>
+
+        <div class="window" id="win-press"style="top: 120px; left: 260px; width: 420px;">
             <div class="title-bar">
                 <div class="title-bar-text">press_photos.exe</div>
                 <div class="title-bar-controls">
@@ -364,6 +402,8 @@
                     <li onclick="openWindow('win-press'); toggleStartMenu()">press_photos.exe</li>
                     <li onclick="openWindow('win-contact'); toggleStartMenu()">contact.exe</li>
                     <li onclick="openWindow('win-videos'); toggleStartMenu()">daddy_shareholders_performance.exe</li>
+                    <li onclick="openWindow('win-bluerider'); toggleStartMenu()">Blue Rider Radio - 2/10/26.exe</li>
+                    <li onclick="openWindow('win-futureintel'); toggleStartMenu()">Future Intel 1/10/26.exe</li>
                     <li onclick="openLogin(); toggleStartMenu()">terminal.exe</li>
                 </ul>
             </div>
