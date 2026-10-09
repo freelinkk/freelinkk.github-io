@@ -5,21 +5,21 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>link.exe</title>
     <link rel="icon" type="image/x-icon" href="/assets/about/cropped.jpg">
-    <link rel="stylesheet" href="https://unpkg.com/xp.css@0.2.6/dist/XP.css">
+    <link rel="stylesheet" href="https://unpkg.com/98.css">
     <style>
         html, body {
             margin: 0;
             padding: 0;
             height: 100%;
             overflow: hidden;
-            font-family: Tahoma, "Segoe UI", Verdana, sans-serif;
+            font-family: "Pixelated MS Sans Serif", Arial, sans-serif;
         }
 
         #desktop {
             position: relative;
             width: 100%;
             height: 100vh;
-            background: #3a7fdd url('/assets/link.exe/bliss.jpg') center / cover no-repeat;
+            background-color: #008080;
             overflow: hidden;
         }
 
@@ -36,29 +36,22 @@
         }
 
         .icon .icon-glyph {
-            font-size: 34px;
+            font-size: 32px;
             line-height: 1;
-            filter: drop-shadow(1px 2px 2px rgba(0, 0, 0, 0.45));
         }
 
         .icon .icon-label {
             color: #fff;
-            font-size: 11px;
+            font-size: 12px;
             text-align: center;
             padding: 1px 3px;
             width: 100%;
             word-break: break-word;
             overflow-wrap: break-word;
-            text-shadow: 1px 1px 1px #000, 0 0 3px rgba(0, 0, 0, 0.6);
         }
 
         .icon.selected .icon-label {
-            background: #316ac5;
-            text-shadow: none;
-        }
-
-        .icon.selected .icon-glyph {
-            opacity: 0.7;
+            background: #000080;
         }
 
         /* windows */
@@ -72,37 +65,8 @@
         }
 
         .window-body {
-            max-height: calc(100vh - 80px);
+            max-height: 60vh;
             overflow: auto;
-        }
-
-        /* everything inside a window scales with it when resized (see initWindowBehavior) */
-        .window-content {
-            zoom: var(--scale, 1);
-        }
-
-        /* XP-style dotted grip in the bottom-right corner */
-        .resize-grip {
-            position: absolute;
-            right: 3px;
-            bottom: 3px;
-            width: 12px;
-            height: 12px;
-            cursor: nwse-resize;
-            touch-action: none;
-            background-image: radial-gradient(circle, #8c8c8c 1px, transparent 1.5px);
-            background-size: 4px 4px;
-            clip-path: polygon(100% 0, 100% 100%, 0 100%);
-            z-index: 1;
-        }
-
-        /* while dragging or resizing, keep videos from swallowing the mouse */
-        body.dragging iframe {
-            pointer-events: none;
-        }
-
-        body.dragging {
-            user-select: none;
         }
 
         .video-embed {
@@ -120,14 +84,10 @@
             border: 0;
         }
 
-        /* folder windows get a white Explorer-style pane */
         .folder-icons {
             display: flex;
             flex-wrap: wrap;
             gap: 16px;
-            background: #fff;
-            border: 1px solid #7f9db9;
-            padding: 12px;
         }
 
         .folder-icon {
@@ -169,9 +129,8 @@
             width: 34px;
             height: 28px;
             background: #000;
-            border: 2px solid #d4d0c8;
-            border-radius: 3px;
-            box-shadow: 1px 2px 3px rgba(0, 0, 0, 0.5);
+            border: 2px solid #c0c0c0;
+            box-shadow: inset 1px 1px #808080, 1px 1px #000;
             color: #00ff00;
             font-family: "Courier New", monospace;
             font-size: 12px;
@@ -187,145 +146,56 @@
             margin: 6px 0 0;
         }
 
-        /* taskbar (Luna blue) */
+        /* taskbar */
         #taskbar {
             position: absolute;
             bottom: 0;
             left: 0;
             width: 100%;
-            height: 30px;
-            background: linear-gradient(to bottom,
-                #1f2f86 0%, #3165c4 3%, #3682e5 6%, #4490e6 10%, #3883e5 12%,
-                #2b71e0 15%, #2663da 18%, #235bd6 20%, #2258d5 23%, #2157d6 38%,
-                #245ddb 54%, #2562df 86%, #245fdc 89%, #2158d4 92%, #1d4ec0 95%, #1941a5 98%);
+            height: 32px;
+            background: silver;
+            border-top: 2px solid #fff;
             display: flex;
             align-items: center;
+            gap: 6px;
+            padding: 0 4px;
             box-sizing: border-box;
             z-index: 1000;
         }
 
         #taskbar #start-btn {
-            height: 100%;
-            min-width: 0;
-            min-height: 0;
-            margin: 0;
-            padding: 0 22px 0 10px;
-            display: flex;
-            align-items: center;
-            gap: 6px;
-            border: none;
-            border-radius: 0 10px 10px 0;
-            background: linear-gradient(to bottom,
-                #3c9a3c 0%, #5bbd5b 8%, #42a842 20%, #3a9c3a 50%, #2f8a2f 85%, #2a7a2a 100%);
-            box-shadow: inset -2px 0 3px rgba(0, 0, 0, 0.35), inset 0 1px 2px rgba(255, 255, 255, 0.4), 2px 0 3px rgba(0, 0, 0, 0.3);
-            color: #fff;
-            font-family: "Franklin Gothic Medium", "Trebuchet MS", Tahoma, sans-serif;
-            font-size: 18px;
-            font-style: italic;
             font-weight: bold;
-            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.6);
-            cursor: pointer;
         }
 
-        #taskbar #start-btn:hover {
-            filter: brightness(1.1);
-        }
-
-        #taskbar #start-btn.active {
-            filter: brightness(0.85);
-        }
-
-        .start-logo {
-            width: 18px;
-            height: 18px;
-            transform: skewY(-6deg);
-            background:
-                linear-gradient(#f25022, #f25022) 0 0 / 46% 46% no-repeat,
-                linear-gradient(#7fba00, #7fba00) 100% 0 / 46% 46% no-repeat,
-                linear-gradient(#00a4ef, #00a4ef) 0 100% / 46% 46% no-repeat,
-                linear-gradient(#ffb900, #ffb900) 100% 100% / 46% 46% no-repeat;
-            filter: drop-shadow(1px 1px 1px rgba(0, 0, 0, 0.5));
-        }
-
-        /* start menu: blue header, white list, blue footer */
         #start-menu {
             position: absolute;
-            bottom: 30px;
-            left: 0;
+            bottom: 32px;
+            left: 4px;
             display: none;
-            width: 260px;
-            background: #fff;
-            border: 1px solid #0831d9;
-            border-radius: 8px 8px 0 0;
-            box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.5);
-            overflow: hidden;
+            min-width: 160px;
+            padding: 4px;
             z-index: 1001;
-        }
-
-        .start-menu-header {
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            padding: 6px 8px;
-            background: linear-gradient(to bottom, #1868ce 0%, #0e60cb 12%, #1164cf 32%, #1b6cd3 47%, #2476dc 60%, #3482e3 77%, #428ee9 90%, #4791eb 100%);
-            border-bottom: 2px solid #e8952f;
-            color: #fff;
-            font-size: 14px;
-            font-weight: bold;
-            text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.5);
-        }
-
-        .start-menu-header img {
-            width: 40px;
-            height: 40px;
-            object-fit: cover;
-            border: 2px solid #fff;
-            border-radius: 3px;
         }
 
         #start-menu ul {
             list-style: none;
             margin: 0;
-            padding: 6px 4px;
+            padding: 0;
         }
 
         #start-menu li {
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            padding: 5px 6px;
-            font-size: 11px;
+            padding: 4px 6px;
             cursor: pointer;
         }
 
-        #start-menu li .menu-glyph {
-            width: 22px;
-            font-size: 18px;
-            text-align: center;
-        }
-
         #start-menu li:hover {
-            background: #316ac5;
+            background: #000080;
             color: #fff;
         }
 
-        .start-menu-footer {
-            height: 28px;
-            background: linear-gradient(to bottom, #4282d6 0%, #418ae3 8%, #3784dc 26%, #3180d7 47%, #2a7ad2 65%, #2475cd 79%, #1a6ec6 100%);
-        }
-
-        /* notification area + clock */
         #taskbar-clock {
             margin-left: auto;
-            height: 100%;
-            display: flex;
-            align-items: center;
-            padding: 0 14px;
-            background: linear-gradient(to bottom, #0c59b9 1%, #139ee9 6%, #18b5f2 10%, #139beb 14%, #1290e8 19%, #0d8dea 63%, #0d9ff1 81%, #0f9eed 88%, #119be9 91%, #1392e2 94%, #137ed7 97%, #095bc9 100%);
-            border-left: 1px solid #1042af;
-            box-shadow: inset 1px 0 1px #18bbff;
-            color: #fff;
-            font-size: 11px;
+            padding: 2px 8px;
         }
 
         /* companion */
@@ -579,23 +449,18 @@
 
         <!-- taskbar -->
         <div id="taskbar">
-            <button id="start-btn" onclick="toggleStartMenu()"><span class="start-logo"></span>start</button>
-            <div id="start-menu">
-                <div class="start-menu-header">
-                    <img src="/assets/about/cropped.jpg" alt="">
-                    link.exe
-                </div>
+            <button id="start-btn" onclick="toggleStartMenu()">Start</button>
+            <div id="start-menu" class="window">
                 <ul>
-                    <li onclick="openWindow('win-description'); toggleStartMenu()"><span class="menu-glyph">📄</span>description.exe</li>
-                    <li onclick="openWindow('win-who'); toggleStartMenu()"><span class="menu-glyph">👤</span>who.exe</li>
-                    <li onclick="openWindow('win-press'); toggleStartMenu()"><span class="menu-glyph">🖼️</span>press_photos.exe</li>
-                    <li onclick="openWindow('win-contact'); toggleStartMenu()"><span class="menu-glyph">✉️</span>contact.exe</li>
-                    <li onclick="openWindow('win-perf-radio'); toggleStartMenu()"><span class="menu-glyph">📁</span>Performances &amp; Radio</li>
-                    <li onclick="openLogin(); toggleStartMenu()"><span class="menu-glyph">⌨️</span>terminal.exe</li>
+                    <li onclick="openWindow('win-description'); toggleStartMenu()">description.exe</li>
+                    <li onclick="openWindow('win-who'); toggleStartMenu()">who.exe</li>
+                    <li onclick="openWindow('win-press'); toggleStartMenu()">press_photos.exe</li>
+                    <li onclick="openWindow('win-contact'); toggleStartMenu()">contact.exe</li>
+                    <li onclick="openWindow('win-perf-radio'); toggleStartMenu()">Performances &amp; Radio</li>
+                    <li onclick="openLogin(); toggleStartMenu()">terminal.exe</li>
                 </ul>
-                <div class="start-menu-footer"></div>
             </div>
-            <div id="taskbar-clock"></div>
+            <div id="taskbar-clock" class="status-bar-field"></div>
         </div>
 
         <img id="companion" src="/assets/gif/2618416_b872b-837352707.gif" alt="">
@@ -628,20 +493,17 @@
 
         function toggleStartMenu() {
             const menu = document.getElementById('start-menu');
-            const open = menu.style.display !== 'block';
-            menu.style.display = open ? 'block' : 'none';
-            document.getElementById('start-btn').classList.toggle('active', open);
+            menu.style.display = (menu.style.display === 'block') ? 'none' : 'block';
         }
 
         document.addEventListener('click', function (e) {
             const menu = document.getElementById('start-menu');
-            if (!menu.contains(e.target) && !e.target.closest('#start-btn')) {
+            if (!menu.contains(e.target) && e.target.id !== 'start-btn') {
                 menu.style.display = 'none';
-                document.getElementById('start-btn').classList.remove('active');
             }
         });
 
-        // dragging, resizing + focus for windows
+        // dragging + focus for windows
         function initWindowBehavior(win) {
             win.addEventListener('mousedown', function () {
                 bringToFront(win);
@@ -657,7 +519,6 @@
                 const startY = e.clientY;
                 const startLeft = win.offsetLeft;
                 const startTop = win.offsetTop;
-                document.body.classList.add('dragging');
 
                 function onMouseMove(e) {
                     win.style.left = (startLeft + e.clientX - startX) + 'px';
@@ -665,71 +526,12 @@
                 }
 
                 function onMouseUp() {
-                    document.body.classList.remove('dragging');
                     document.removeEventListener('mousemove', onMouseMove);
                     document.removeEventListener('mouseup', onMouseUp);
                 }
 
                 document.addEventListener('mousemove', onMouseMove);
                 document.addEventListener('mouseup', onMouseUp);
-            });
-
-            // double-clicking the title bar puts the window back to its original size
-            titleBar.addEventListener('dblclick', function (e) {
-                if (e.target.closest('.title-bar-controls') || !win.dataset.baseWidth) return;
-                win.style.width = win.dataset.baseWidth + 'px';
-                win.style.setProperty('--scale', 1);
-            });
-
-            // wrap the body's contents so they can be scaled as one block
-            const body = win.querySelector('.window-body');
-            if (!body) return;
-            const content = document.createElement('div');
-            content.className = 'window-content';
-            while (body.firstChild) content.appendChild(body.firstChild);
-            body.appendChild(content);
-
-            // corner grip: resizing scales the window and everything in it proportionally
-            const grip = document.createElement('div');
-            grip.className = 'resize-grip';
-            win.appendChild(grip);
-
-            grip.addEventListener('pointerdown', function (e) {
-                e.preventDefault();
-                e.stopPropagation();
-                bringToFront(win);
-
-                // remember the size the window was designed at, the first time it's resized
-                if (!win.dataset.baseWidth) win.dataset.baseWidth = win.offsetWidth;
-                const baseWidth = Number(win.dataset.baseWidth);
-                const startWidth = win.offsetWidth;
-                const ratio = startWidth / win.offsetHeight;
-                const startX = e.clientX;
-                const startY = e.clientY;
-
-                grip.setPointerCapture(e.pointerId);
-                document.body.classList.add('dragging');
-
-                function onMove(e) {
-                    // follow whichever direction moved further, so dragging down works too
-                    const dx = e.clientX - startX;
-                    const dy = (e.clientY - startY) * ratio;
-                    const delta = Math.abs(dx) > Math.abs(dy) ? dx : dy;
-                    const width = Math.max(160, Math.min(startWidth + delta, window.innerWidth));
-                    win.style.width = width + 'px';
-                    win.style.setProperty('--scale', width / baseWidth);
-                }
-
-                function onUp() {
-                    document.body.classList.remove('dragging');
-                    grip.removeEventListener('pointermove', onMove);
-                    grip.removeEventListener('pointerup', onUp);
-                    grip.removeEventListener('pointercancel', onUp);
-                }
-
-                grip.addEventListener('pointermove', onMove);
-                grip.addEventListener('pointerup', onUp);
-                grip.addEventListener('pointercancel', onUp);
             });
         }
 
