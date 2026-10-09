@@ -107,6 +107,11 @@
             border: 1px solid #808080;
         }
 
+        .folder-icon .folder-glyph {
+            font-size: 40px;
+            line-height: 1;
+        }
+
         .folder-icon-label {
             font-size: 12px;
             text-align: center;
@@ -235,19 +240,9 @@
             <div class="icon-label">contact.exe</div>
         </div>
 
-        <div class="icon" style="top: 420px; left: 20px;" ondblclick="openWindow('win-videos')">
-            <div class="icon-glyph">🎬</div>
-            <div class="icon-label">daddy_shareholders_performance.exe</div>
-        </div>
-
-        <div class="icon" style="top: 20px; left: 110px;" ondblclick="openWindow('win-bluerider')">
-            <div class="icon-glyph">🎬</div>
-            <div class="icon-label">Blue Rider Radio - 2/10/26.exe</div>
-        </div>
-
-        <div class="icon" style="top: 120px; left: 110px;" ondblclick="openWindow('win-futureintel')">
-            <div class="icon-glyph">🎬</div>
-            <div class="icon-label">Future Intel 1/10/26.exe</div>
+        <div class="icon" style="top: 420px; left: 20px;" ondblclick="openWindow('win-perf-radio')">
+            <div class="icon-glyph">📁</div>
+            <div class="icon-label">Performances &amp; Radio</div>
         </div>
 
         <div class="icon" style="top: 540px; left: 20px;" ondblclick="openLogin()">
@@ -380,6 +375,66 @@
             </div>
         </div>
 
+        <!-- Performances & Radio folder and its subfolders -->
+        <div class="window" id="win-perf-radio" style="top: 100px; left: 220px; width: 300px;">
+            <div class="title-bar">
+                <div class="title-bar-text">Performances &amp; Radio</div>
+                <div class="title-bar-controls">
+                    <button aria-label="Close" onclick="closeWindow('win-perf-radio')"></button>
+                </div>
+            </div>
+            <div class="window-body">
+                <div class="folder-icons">
+                    <div class="folder-icon" ondblclick="openWindow('win-radio')">
+                        <div class="folder-glyph">📁</div>
+                        <div class="folder-icon-label">Radio</div>
+                    </div>
+                    <div class="folder-icon" ondblclick="openWindow('win-performances')">
+                        <div class="folder-glyph">📁</div>
+                        <div class="folder-icon-label">Performances</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="window" id="win-radio" style="top: 140px; left: 260px; width: 300px;">
+            <div class="title-bar">
+                <div class="title-bar-text">Radio</div>
+                <div class="title-bar-controls">
+                    <button aria-label="Close" onclick="closeWindow('win-radio')"></button>
+                </div>
+            </div>
+            <div class="window-body">
+                <div class="folder-icons">
+                    <div class="folder-icon" ondblclick="openWindow('win-bluerider')">
+                        <div class="folder-glyph">🎬</div>
+                        <div class="folder-icon-label">Blue Rider Radio - 2/10/26.exe</div>
+                    </div>
+                    <div class="folder-icon" ondblclick="openWindow('win-futureintel')">
+                        <div class="folder-glyph">🎬</div>
+                        <div class="folder-icon-label">Future Intel 1/10/26.exe</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="window" id="win-performances" style="top: 180px; left: 300px; width: 300px;">
+            <div class="title-bar">
+                <div class="title-bar-text">Performances</div>
+                <div class="title-bar-controls">
+                    <button aria-label="Close" onclick="closeWindow('win-performances')"></button>
+                </div>
+            </div>
+            <div class="window-body">
+                <div class="folder-icons">
+                    <div class="folder-icon" ondblclick="openWindow('win-videos')">
+                        <div class="folder-glyph">🎬</div>
+                        <div class="folder-icon-label">daddy_shareholders_performance.exe</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
         <div class="window" id="win-press"style="top: 120px; left: 260px; width: 420px;">
             <div class="title-bar">
                 <div class="title-bar-text">press_photos.exe</div>
@@ -401,9 +456,7 @@
                     <li onclick="openWindow('win-who'); toggleStartMenu()">who.exe</li>
                     <li onclick="openWindow('win-press'); toggleStartMenu()">press_photos.exe</li>
                     <li onclick="openWindow('win-contact'); toggleStartMenu()">contact.exe</li>
-                    <li onclick="openWindow('win-videos'); toggleStartMenu()">daddy_shareholders_performance.exe</li>
-                    <li onclick="openWindow('win-bluerider'); toggleStartMenu()">Blue Rider Radio - 2/10/26.exe</li>
-                    <li onclick="openWindow('win-futureintel'); toggleStartMenu()">Future Intel 1/10/26.exe</li>
+                    <li onclick="openWindow('win-perf-radio'); toggleStartMenu()">Performances &amp; Radio</li>
                     <li onclick="openLogin(); toggleStartMenu()">terminal.exe</li>
                 </ul>
             </div>
