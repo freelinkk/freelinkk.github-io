@@ -29,17 +29,21 @@
     <link rel="stylesheet" href="styles/styles.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
 
-    <title>Document</title>
+    <title>Discography – freelink</title>
     <link rel="icon" type="image/x-icon" href="/assets/about/cropped.jpg">
 
-  </head>
+  
+    <link rel="stylesheet" href="styles/discography.css">
+    <link rel="stylesheet" href="styles/mobile.css">
+    <script src="js/mobile.js"></script>
+</head>
 
 <body>
     <div class="container">
-    
+
       <div class="row">
 
-        <!-- SIDEBAR -->  
+        <!-- SIDEBAR -->
         <div class="col-1">
 
           <!--Navigation bar-->
@@ -51,23 +55,29 @@
           });
           </script>
           <!--end of Navigation bar-->
-          
+
+        </div>
+
+        <!-- built by js/discography.js from js/discography-data.js -->
+        <div class="col-11">
+          <div class="dg" style="padding-top: 82px;">
+            <h1 class="dg-h1">Discography</h1>
+            <div id="discography" data-view="list">
+              <noscript>
+                <p>
+                  <a href="https://singthebodyelectronic.bandcamp.com/album/worlds">Worlds</a> &middot;
+                  <a href="https://unknownsonicsources.bandcamp.com/album/subject-to-the-sonic-address-of-an-unknown-source">Subject to the sonic address of an unknown source</a> &middot;
+                  <a href="https://interior-design.bandcamp.com/album/utopia-was-is">Utopia Was/Is</a>
+                </p>
+              </noscript>
+            </div>
+          </div>
+        </div>
+
       </div>
+    </div>
 
-      <div class="col-11"> 
-          <p style="padding-top: 82px; padding-left: 40px;">
-            <a style="font-size: 20px;"><b>Discography</b></a>
-
-            
-
-          </p>
-      </div>
-      
-  </div>
-</div>
-
+    <script src="js/discography-data.js"></script>
+    <script src="js/discography.js"></script>
 </body>
-
-
-
-
+</html>

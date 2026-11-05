@@ -9,9 +9,9 @@
             <br>
             <li><a href="/installation.html">works</a></li>
             <li><a href="https://www.itsnova.com/jason687" target="blank">sound design</a></li>   
+            <li><a href="/discography.html">discography</a></li>
             <br>
             <li><a href="/mix.html">mixes</a></li>
-            <!-- <li><a href="/discography.html">discography</a></li> -->
             <li><a href="/visual.html">visual</a></li>
             <br>
             <li><a href="https://www.instagram.com/freelink0000/" target="blank">instagram</a></li>
@@ -21,8 +21,10 @@
     </div>
 </nav>
 <script>
+    // sub pages keep their section highlighted (album.html belongs to discography)
+    var here = window.location.pathname === '/album.html' ? '/discography.html' : window.location.pathname;
     document.querySelectorAll('.sidebar a[href]').forEach(function (link) {
-        if (link.pathname === window.location.pathname) {
+        if (link.pathname === here) {
             link.classList.add('current');
         }
     });

@@ -9,6 +9,13 @@ html, body {
   margin: 0 0 0 var(--nav-width); */
 }
 
+/* Always reserve the scrollbar's space, so the layout (and the nav) doesn't jump sideways
+   between short pages and pages long enough to scroll. */
+html { overflow-y: scroll; }
+@supports (scrollbar-gutter: stable) {
+  html { overflow-y: auto; scrollbar-gutter: stable; }
+}
+
 /* GENERAL IMAGE FORMATTING */
 
 

@@ -1,0 +1,82 @@
+/* freelink – discography list + album pages.  Logic: js/discography.js, data: js/discography-data.js */
+
+.dg { padding-left: 40px; padding-right: 40px; max-width: 640px; }
+.dg-h1 { font-size: 20px; font-weight: bold; margin: 0 0 44px; }       /* "Discography" heading */
+
+/* ---- list ---- */
+.dg-artist { margin: 0 0 26px; }
+.dg-artist h2 { font-size: 14px; font-weight: bold; margin: 0 0 6px; }
+.dg-albums { list-style: none; margin: 0; padding: 0 0 0 18px; }   /* albums sit slightly to the right of the artist name */
+.dg-albums li { list-style: none; }
+.dg-albums a {
+  display: flex; gap: 8px;
+  padding: 5px 0; font-size: 13px;
+  color: #000; text-decoration: none;
+}
+.dg-albums a:hover .dg-name { color: #e07d59; }
+.dg-year { color: #666; white-space: nowrap; }
+
+/* ---- album page ---- */
+/* extra room under an album so you can keep scrolling until its text is mid-screen */
+#discography[data-view="album"] { padding-bottom: 50vh; }
+
+.dg-title { font-size: 20px; font-weight: bold; margin: 0 0 6px; line-height: 1.25; }
+.dg-meta { font-size: 13px; margin: 0 0 18px; color: #333; }
+
+.dg .dg-cover { display: block; width: 100%; height: auto; padding: 0; margin: 0; }
+.dg-zoom { display: block; width: 100%; max-width: 420px; padding: 0; margin: 0 0 16px; border: 0; background: none; cursor: zoom-in; }
+.dg-zoom:focus-visible { outline: 2px solid #e07d59; outline-offset: 3px; }
+
+/* ---- lightbox ---- */
+html.dg-lock { overflow: hidden; }
+.dg-lb {
+  position: fixed; inset: 0; z-index: 2000;
+  display: flex; align-items: center; justify-content: center;
+  background: rgba(0, 0, 0, .86);
+  opacity: 0; transition: opacity .2s ease;
+  cursor: zoom-out;
+}
+.dg-lb.is-open { opacity: 1; }
+.dg-lb-img {
+  display: block;
+  width: auto; height: auto; max-width: 92vw; max-height: 92vh;
+  padding: 0 !important;
+  box-shadow: 0 12px 60px rgba(0, 0, 0, .55);
+  transition: transform .25s ease;
+}
+.dg-lb-close {
+  position: absolute; top: 12px; right: 14px;
+  width: 44px; height: 44px;
+  font: inherit; font-size: 30px; line-height: 1;
+  color: #fff; background: none; border: 0; cursor: pointer;
+}
+.dg-lb-close:focus-visible { outline: 2px solid #e07d59; outline-offset: 2px; }
+@media (prefers-reduced-motion: reduce) { .dg-lb, .dg-lb-img { transition: none; } }
+
+.dg-links { margin: 0 0 24px; }
+.dg-btn {
+  display: block; width: fit-content;
+  margin: 0 0 6px;
+  font-size: 13px;
+  color: #000;
+  text-decoration: none;
+}
+.dg-btn:hover { color: #e07d59; }
+.dg-btn:focus-visible, .dg-albums a:focus-visible { outline: 2px solid #e07d59; outline-offset: 2px; }
+
+.dg-about, .dg-credits { font-size: 13px; line-height: 1.6; }
+.dg-about p, .dg-credits p { margin: 0 0 .9em; }
+.dg-h2 { font-size: 13px; font-weight: bold; margin: 26px 0 8px; }
+.dg-credits { color: #333; }
+.dg-about a, .dg-credits a { color: #000; text-underline-offset: 2px; }
+.dg-about a:hover, .dg-credits a:hover { color: #e07d59; }
+
+@media (max-width: 820px) {
+  .dg { padding-left: 0; padding-right: 0; max-width: 100%; }
+  .dg-albums { padding-left: 16px; }
+  .dg-albums a { font-size: 16px; padding: 10px 0; min-height: 44px; align-items: center; }
+  .dg-artist h2 { font-size: 16px; }
+  .dg-meta, .dg-about, .dg-credits, .dg-h2 { font-size: 15px; }
+  .dg-zoom { max-width: 100%; }
+  .dg-btn { display: flex; align-items: center; min-height: 44px; font-size: 16px; }
+}

@@ -29,55 +29,54 @@
     <link rel="stylesheet" href="styles/styles.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
 
-    <title>Document</title>
+    <title>Mixes – freelink</title>
     <link rel="icon" type="image/x-icon" href="/assets/about/cropped.jpg">
 
+    <link rel="stylesheet" href="styles/mixes.css">
+    <link rel="stylesheet" href="styles/mobile.css">
+    <script src="js/mobile.js"></script>
 </head>
 
 <body>
     <div class="container">
-    
-    <div class="row">
 
-        <!-- SIDEBAR -->  
+      <div class="row">
+
+        <!-- SIDEBAR -->
         <div class="col-1">
 
-        <!--Navigation bar-->
-        <div id="nav-placeholder">
-        </div>
-        <script>
-        $(function(){
+          <!--Navigation bar-->
+          <div id="nav-placeholder">
+          </div>
+          <script>
+          $(function(){
             $("#nav-placeholder").load("pages/navbar/navmain.html");
-        });
-        </script>
-        <!--end of Navigation bar-->
-        
-    </div>
+          });
+          </script>
+          <!--end of Navigation bar-->
 
-    <div class="col-3">
-
-        <!--Navigation bar-->
-        <div id="navworks-placeholder">
         </div>
-        <script>
-        $(function(){
-            $("#navworks-placeholder").load("pages/navbar/navmix.html");
-        });
-        </script>
-        <!--end of Navigation bar-->
 
+        <!-- MIX ARCHIVE (built by js/mixes.js from js/mixes-data.js) -->
+        <div class="col-11">
+          <div class="mx" style="padding-top: 82px;">
+            <h1>Mixes</h1>
+            <div id="mixes-archive">
+              <noscript>
+                <p class="mx-noscript">
+                  <a href="/pages/mixes/radio.html">Radio</a> &middot;
+                  <a href="/pages/mixes/club.html">Club mixes</a> &middot;
+                  <a href="/pages/mixes/mixtape.html">Mixtapes</a>
+                </p>
+              </noscript>
+            </div>
+          </div>
+        </div>
+
+      </div>
     </div>
 
-    <div class="col-8">
-
-
-    </div>
-    
-</div>
-</div>
-
+    <script src="js/mixes-data.js"></script>
+    <script src="js/mixes.js"></script>
 </body>
-
-
-
-
+</html>
