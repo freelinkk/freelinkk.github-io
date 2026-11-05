@@ -106,13 +106,6 @@
   }
 
   function build() {
-    // title fix: most pages are still titled "Document"
-    if (!document.title || document.title.toLowerCase() === 'document') {
-      var h = document.querySelector('.row [style*="font-size: 20px"], .row b');
-      var t = h && h.textContent.trim();
-      document.title = (t ? t + ' – ' : '') + 'freelink';
-    }
-
     // main landmark = first column that isn't navigation and has something in it
     var cols = [].slice.call(document.querySelectorAll('.row > [class*="col-"]'));
     var main = cols.filter(function (c) {

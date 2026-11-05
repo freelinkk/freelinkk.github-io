@@ -66,6 +66,10 @@ window.MIXES = [
   { title: 'Tokyovitamin Radio', artist: 'DJ Freelink', type: 'radio', location: 'Tokyovitamin Radio', date: '2016-06-16',
     soundcloud: ['https://api.soundcloud.com/tracks/269404597'] },
 
+  { title: 'Sonic Acts presents: Feedback Loops', artist: 'freelink', type: 'radio', location: 'Radio WORM, Rotterdam', date: '2024-03-11',
+    description: 'Reflections on the Sonic Acts Biennale.\n\nFind me at 1:36:00.',
+    mixcloud: ['/radiowormrotterdam/sonic-acts-feedback-loops-110324/'] },
+
   /* ---- club ---- */
   { title: '5 Year Anniversary Party', artist: 'freelink', type: 'club', location: 'Treehouse NDSM', date: '2024-11-02',
     soundcloud: ['https://api.soundcloud.com/tracks/1948783491'] },
