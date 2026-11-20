@@ -100,7 +100,7 @@
   }
   #navworks-placeholder .sticky-top { position: static; }
   #navworks-placeholder li { list-style: none; }
-  #navworks-placeholder a:empty { display: none; }
+  #navworks-placeholder .sidebar a:empty { display: none !important; }   /* the menu fragments end with empty placeholder links */
   #navworks-placeholder .sidebar a {
     display: flex; align-items: center;
     min-height: 44px;

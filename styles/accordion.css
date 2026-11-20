@@ -1,0 +1,73 @@
+/* freelink – expandable sections (accordion)
+   Markup:  <button class="acc-toggle" aria-expanded="false" aria-controls="ID"> title <span class="acc-chevron"></span></button>
+            <div id="ID" class="acc-panel"><div class="acc-inner"> …content… </div></div>
+   Behaviour: js/accordion.js flips aria-expanded and .is-open. */
+
+:root {
+  --acc-tint: #fbf4f0;        /* the same warm tint as the mix archive rows */
+  --acc-tint-strong: #f5e4da;
+  --acc-orange: #e07d59;
+  --acc-time: 1.3s;           /* fallback speed; js/accordion.js sets it per section from its height (~3000px per second) */
+  --acc-ease: cubic-bezier(0, 0, .58, 1);       /* ease-out: starts moving the instant you click, then slows to a gentle stop */
+}
+
+/* ---- the header you click ---- */
+.acc-toggle {
+  display: flex; align-items: center; justify-content: space-between; gap: 18px;
+  width: 100%;
+  margin: 18px 0 0; padding: 18px 20px;
+  font: inherit; font-size: 14px; font-weight: bold; line-height: 1.4; text-align: left;
+  color: #000;
+  background: var(--acc-tint);
+  border: 0; border-left: 4px solid var(--acc-orange); border-radius: 0;
+  cursor: pointer;
+  transition: background-color .25s ease;
+}
+.acc-toggle:hover,
+.acc-toggle[aria-expanded="true"] { background: var(--acc-tint-strong); }
+.acc-toggle:focus-visible { outline: 2px solid var(--acc-orange); outline-offset: 3px; }
+
+/* ---- arrow: points down when closed, turns to point up when open ---- */
+.acc-chevron {
+  position: relative; flex: 0 0 auto;
+  width: 26px; height: 26px;
+  transition: transform .5s var(--acc-ease);   /* the arrow turns quicker than the panel grows */
+}
+.acc-chevron::before {
+  content: ""; position: absolute; left: 50%; top: 50%;
+  width: 10px; height: 10px;
+  margin: -8px 0 0 -5px;
+  border-right: 2px solid var(--acc-orange); border-bottom: 2px solid var(--acc-orange);
+  transform: rotate(45deg);
+}
+.acc-toggle[aria-expanded="true"] .acc-chevron { transform: rotate(180deg); }
+
+/* ---- the panel: its bottom edge slides down to open and back up to close ----
+   No fading: the content stays solid and is simply revealed (or covered) by that moving edge,
+   so on closing it disappears as the bottom of the panel comes up, not before. */
+.acc-panel {
+  display: grid;
+  grid-template-rows: 0fr;
+  visibility: hidden;               /* closed content can't be tabbed to */
+  border-left: 4px solid var(--acc-tint-strong);   /* the soft rule beside an open panel (invisible at zero height) */
+  transition:
+    grid-template-rows var(--acc-time) var(--acc-ease),
+    visibility 0s linear var(--acc-time);   /* only hide once the closing is finished */
+}
+.acc-panel.is-open {
+  grid-template-rows: 1fr;
+  visibility: visible;
+  transition:
+    grid-template-rows var(--acc-time) var(--acc-ease),
+    visibility 0s;
+}
+.acc-inner { min-height: 0; overflow: hidden; padding: 0 0 0 20px; }
+
+@media (prefers-reduced-motion: reduce) {
+  .acc-toggle, .acc-chevron, .acc-panel, .acc-panel.is-open { transition: none; }
+}
+
+@media (max-width: 820px) {
+  .acc-toggle { padding: 16px; font-size: 16px; min-height: 48px; }
+  .acc-inner { padding-left: 12px; }
+}

@@ -31,8 +31,10 @@
     <link rel="icon" type="image/x-icon" href="/assets/about/cropped.jpg">
 
   
+    <link rel="stylesheet" href="/styles/accordion.css">
     <link rel="stylesheet" href="/styles/mobile.css">
     <script src="/js/mobile.js"></script>
+    <script src="/js/accordion.js"></script>
 </head>
 
 <body>
@@ -71,8 +73,8 @@
 
       <div class="col-8" style="padding-top: 100px;">
             <br>
-            <video class="video" controls style="width: 100%; height: auto;">
-              <source src="../../assets/installation/CYBORG2/U_BANNER_FINAL.mp4#t=6" type="video/mp4">
+            <video class="video" controls preload="metadata" style="width: 100%; height: auto;">
+              <source src="../../assets/installation/CYBORG2/U_BANNER_FINAL.mp4#t=0.001" type="video/mp4">
             </video>
 
 
@@ -108,14 +110,14 @@
             </p>
           </div>
 
-          <!-- BUTTON 1 -->
+          <!-- EDITION 1 -->
           <div style="padding-right: 50px;">
-            <button style="border: none; background-color: white; border-bottom: 1px solid black; text-decoration: none; display: inline-block; width: 100%;" onClick="showImage()">
-              <div style="float: left"> A Friend To The Cyborgian Echo: Unhinged - Treehouse NDSM, Amsterdam, April 2024 </div>
-              <div style="float: right;">⌄</div>
+            <button type="button" id="first-toggle" class="acc-toggle" aria-expanded="false" aria-controls="first">
+              <span>A Friend To The Cyborgian Echo: Unhinged - Treehouse NDSM, Amsterdam, April 2024</span>
+              <span class="acc-chevron" aria-hidden="true"></span>
             </button>
           </div>
-          <div id="first" class="hidden" style="transition: width 2s;">
+          <div id="first" class="acc-panel" role="region" aria-labelledby="first-toggle"><div class="acc-inner">
             <br>
             <img src="../../assets/installation/CYBORG2/A Friend To The Cyborgian Echo_Treehouse Promotion_BANNER.png" alt="">
             <p>&nbsp</p>
@@ -167,62 +169,28 @@
                 </div>
               </div>
             </div>
-            <div id="carousel4" class="carousel slide" data-ride="carousel">
-              <div class="carousel-inner">
-                <div class="carousel-item">
-                  <div class="d-flex justify-content-center">
-                    <img src="../../assets/installation/CYBORG2/container.jpg" alt="">
-                  </div>
-                </div>
-                <div class="carousel-item active">
-                  <div class="d-flex justify-content-center">
-                    <img src="../../assets/installation/CYBORG2/AFTTCE-5.jpg" class="d-block w-100" alt="...">
-                  </div>
-                </div>
-                <div class="carousel-item">
-                  <div class="d-flex justify-content-center">
-                    <img src="../../assets/installation/CYBORG2/AFTTCE-1.jpg" class="d-block w-100" alt="...">
-                  </div>
-                </div>
-                <div class="carousel-item">
-                  <div class="d-flex justify-content-center">
-                    <img src="../../assets/installation/CYBORG2/AFTTCE-3.jpg" class="d-block w-100" alt="...">
-                  </div>
-                </div>
-              <div class="carousel-item">
-                <div class="d-flex justify-content-center">
-                  <img src="../../assets/installation/CYBORG2/AFTTCE-8.jpg" class="d-block w-100" alt="...">
-                </div>
-              </div>
-              <div class="carousel-item">
-                <div class="d-flex justify-content-center">
-                  <img src="../../assets/installation/CYBORG2/AFTTCE-12.jpg" class="d-block w-100" alt="...">
-                </div>
-              </div>
-              </div>
-              <a class="carousel-control-prev" href="#carousel4" role="button" data-slide="prev">
-                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                <span class="sr-only"></span>
-              </a>
-              <a class="carousel-control-next" href="#carousel4" role="button" data-slide="next">
-                <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                <span class="sr-only"></span>
-              </a>
+            <div class="photo-stack">
+              <img src="../../assets/installation/CYBORG2/AFTTCE-5.jpg" alt="...">
+              <img src="../../assets/installation/CYBORG2/AFTTCE-1.jpg" alt="...">
+              <img src="../../assets/installation/CYBORG2/AFTTCE-3.jpg" alt="...">
+              <img src="../../assets/installation/CYBORG2/AFTTCE-8.jpg" alt="...">
+              <img src="../../assets/installation/CYBORG2/AFTTCE-12.jpg" alt="...">
+              <img src="../../assets/installation/CYBORG2/container.jpg" alt="">
             </div>
             <p>&nbsp</p>
             <div style="padding-right: 50px;">
               <iframe width="100%" height="300px" src="https://www.youtube.com/embed/BZIFLdXaJcY?si=MdZqTQdaCaVgZ7WS" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
             </div>
-          </div>
-          <br>
-          <!-- BUTTON 2 -->
-          <div style="padding-right: 50px; ">
-            <button style="border: none; background-color: white; border-bottom: 1px solid black; text-decoration: none; display: inline-block; width: 100%;" onClick="showImage1()">
-              <div style="float: left">  A Friend To The Cyborgian Echo - Prisma Estúdio, Portugal, Sept 2023 </div>
-              <div style="float: right;">⌄</div> 
+          </div></div>
+
+          <!-- EDITION 2 -->
+          <div style="padding-right: 50px;">
+            <button type="button" id="second-toggle" class="acc-toggle" aria-expanded="false" aria-controls="second">
+              <span>A Friend To The Cyborgian Echo - Prisma Estúdio, Portugal, Sept 2023</span>
+              <span class="acc-chevron" aria-hidden="true"></span>
             </button>
           </div>
-          <div id="second" class="hidden" style="transition: width 2s;">
+          <div id="second" class="acc-panel" role="region" aria-labelledby="second-toggle"><div class="acc-inner">
             <br>
             <img src="../../assets/installation/cyborg/HorizontalPoster.jpg" alt="">
             <p>&nbsp</p>
@@ -265,45 +233,15 @@
               </div>
             </div>
             <p>&nbsp</p>
-            <div id="carousel2" class="carousel slide" data-ride="carousel">
-              <div class="carousel-inner">
-                <div class="carousel-item">
-                  <div class="d-flex justify-content-center">
-                    <img src="../../assets/installation/cyborg/Cyborg_1.jpg" alt="...">
-                  </div>
-                </div>
-                <div class="carousel-item">
-                  <div class="d-flex justify-content-center">
-                    <img src="../../assets/installation/cyborg/Cyborg_2.jpg" class="d-block w-100" alt="...">
-                  </div>
-                </div>
-                <div class="carousel-item">
-                  <div class="d-flex justify-content-center">
-                    <img src="../../assets/installation/cyborg/Cyborg_3.jpg" class="d-block w-100" alt="...">
-                  </div>
-                </div>
-                <div class="carousel-item">
-                  <div class="d-flex justify-content-center">
-                    <img src="../../assets/installation/cyborg/Cyborg_4.jpg" class="d-block w-100" alt="...">
-                  </div>
-                </div>
-              </div>
-              <div class="carousel-item active">
-                <div class="d-flex justify-content-center">
-                  <img src="../../assets/installation/cyborg/DSC09107_01.jpg" alt="...">
-                </div>
-              </div>
-              <a class="carousel-control-prev" href="#carousel2" role="button" data-slide="prev">
-                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                <span class="sr-only"></span>
-              </a>
-              <a class="carousel-control-next" href="#carousel2" role="button" data-slide="next">
-                <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                <span class="sr-only"></span>
-              </a>
+            <div class="photo-stack">
+              <img src="../../assets/installation/cyborg/DSC09107_01.jpg" alt="...">
+              <img src="../../assets/installation/cyborg/Cyborg_1.jpg" alt="...">
+              <img src="../../assets/installation/cyborg/Cyborg_2.jpg" alt="...">
+              <img src="../../assets/installation/cyborg/Cyborg_3.jpg" alt="...">
+              <img src="../../assets/installation/cyborg/Cyborg_4.jpg" alt="...">
             </div>
             <p>&nbsp</p>
-          </div>
+          </div></div>
         
           <div style="padding-right: 50px;">
             <p>&nbsp</p>
